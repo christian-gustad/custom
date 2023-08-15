@@ -1,0 +1,430 @@
+* List of configuration  that needs to be done
+
+** TODO package-utils
+https://github.com/Silex/package-utils
+** TODO Configure emacs for outlook
+https://www.emacswiki.org/emacs/MsOutlook
+** TODO Install for python flymake
+** TODO postgres (pg)
+https://github.com/emacsmirror/pg
+** TODO Setup hydra
+
+** TODO Configure Yasnippet
+
+** TODO Fix Indents
+
+** TODO Fix prettify
+
+** TODO Setupd manage-minor-mode
+
+** TODO Setup company
+
+** TODO Setup math-symbols list
+
+** TODO Reddit in md4rd?
+
+** TODO mode-icons
+
+** TODO Github Octions
+
+** TODO Font Awsome
+
+** TODO Font Mfizz
+
+** TODO IcoMoon
+** TODO Themes
+mbo70s-theme
+minsk theme
+minimal-theme
+modus-themes
+  monotropic-theme
+  mood-one-theme
+  naga-theme
+naysayer-theme
+  nimbus-theme
+    panda-theme 
+ night-owl-theme
+  nordic-night-theme
+    nova-theme
+    nubox
+     nyx-theme
+      obsidian-theme
+       occidental-theme
+         oceanic-theme
+           omtose-phellack-theme
+            paganini-theme
+              pastelmac-theme
+                poet-theme
+                 prassee-theme 
+               phoenix-dark-mono-theme
+                 rimero-theme 
+** TODO setup calfw for org
+** TODO pretty-mode
+**  scratch 
+https://github.com/pretty-mode/pretty-mode
+** TODO pretty-symbols
+** TODO percient and for company
+https://github.com/radian-software/prescient.el
+** TODO pkgbuild-mode
+** TODO   py-autopep8 
+** TODO ranger
+https://github.com/punassuming/ranger.el
+** TODO recently
+** TODO python-black
+** TODO python-mode
+** TODO pyenv-auto
+** TODO python-isort
+** TODO python-mls
+** TODO pyimport
+** TODO pylint
+** TODO pyydoc
+** TODO py-import-check
+** TODO py-isort
+** TODO py-snippet
+** TODO py-yapf
+** TODO paradox
+** TODO popup-switcher
+https://github.com/kostafey/popup-switcher
+** TODO popup
+** TODO pos-tip
+https://www.emacswiki.org/emacs/PosTip
+**
+
+** TODO moody
+https://github.com/tarsius/moody
+** TODO pet
+https://github.com/wyuenho/emacs-pet
+** TODO possily switch to mood-line
+** TODO Configure projectiel
+** TODO namefame with projectile
+** TODO Possibly nano-agenda + modeline and theme
+** TODO Setup IVY possibly
+** TODO nerd-icons
+  nerd-icons-completion          20230430.1611  available    melpa    Add icons to completion candidates
+  nerd-icons-dired               20230803.1848  available    melpa    Shows icons for each file in dired mode
+  nerd-icons-ibuffer             1.0.0          available    melpa-stable Display nerd icons in ibuffer
+  nerd-icons-ibuffer             20230417.1549  available    melpa    Display nerd icons in ibuffer
+  nerd-icons-ivy-rich            1.0.0          available    melpa-stable Excellent experience with nerd icons for ivy/counsel
+  nerd-icons-ivy-rich 
+
+** TODO awsome tab
+
+** TODO dash
+
+** TODO swiper helm
+https://github.com/abo-abo/swiper-helm
+** TODO nswbuff
+
+** TODO   open-in-msvs 
+https://github.com/manateelazycat/awesome-tab
+
+** TODO org-super-agenda
+** TODO org-ac
+https://github.com/aki2o/org-ac
+
+*** auto-complete-pcmp
+
+*** log4e
+
+*** yaxception
+
+** TODO org-appear
+
+** TODO org-link-beautify
+all-the-icons
+cl-lib
+color
+ol
+org
+org-crypt
+org-element
+** org-modern
+https://github.com/minad/org-modern
+** org-preview-html
+https://github.com/jakebox/org-preview-html
+** org-projectile-helm
+
+|* Basic customization
+** Update all packages
+ #+begin_src emacs-lisp
+
+   (require 'package)
+   ;; Should make MELP more stable
+   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+   ;;(setq package-enable-at-startup nil)
+   (setq package-archives '())
+   (add-to-list 'package-archives
+                '("melpa-stable" . "https://stable-melpa.org/packages/") t)
+      (add-to-list 'package-archives
+                   '("melpa" . "http://melpa.milkbox.net/packages/") t)
+      (add-to-list 'package-archives
+                   '("gnu" . "http://elpa.gnu.org/packages/"))  
+      (add-to-list 'package-archives
+                   '("marmalade" . "https://marmalade-repo.org/packages/"))
+      (add-to-list 'package-archives
+                   '("org" . "http://orgmode.org/elpa/") t)
+      (add-to-list 'package-archives
+                   '("tromey" . "http://tromey.com/elpa/") t)
+
+      (package-initialize)
+            (ignore-errors
+               (auto-package-update-now))
+   (package-refresh-contents)
+
+ #+end_src
+** Quelpa
+#+begin_src emacs-lisp
+(use-package quelpa
+  :defer 5
+  :custom (quelpa-upgrade-p t "Always try to update packages")
+  :config
+  ;; Get ‘quelpa-use-package’ via ‘quelpa’
+  (quelpa
+   '(quelpa-use-package
+     :fetcher git
+     :url "https://github.com/quelpa/quelpa-use-package.git"))
+  (require 'quelpa-use-package))
+   #+end_src
+** Global keybindings
+
+ #+begin_src emacs-lisp
+      (global-set-key [f12] 'helm-bookmarks)
+      (global-set-key [f11] 'helm-recentf)
+      (global-set-key [f9]  'treemacs)
+      (global-set-key [f7] '(global-prettify-symbols-mode))
+   ;; functions
+   ;;    ;; Wind
+      ;(global-set-key (kbd "C-c <left>")  'windmove-left)
+      ;(global-set-key (kbd "C-c <right>") 'windmove-right)
+      ;(global-set-key (kbd "C-c <up>")    'windmove-up)
+      ;(global-set-key (kbd "C-c <down>")  'windmove-down)
+      ;; Org
+      (global-set-key (kbd "C-c n p") 'org-projectile-project-todo-completing-read)
+#+end_src
+
+#+RESULTS:
+: org-projectile-project-todo-completing-read
+** Startup
+***** Dashboard
+ #+begin_src emacs-lisp
+	       (require 'dashboard)
+	       (dashboard-setup-startup-hook)
+	       ;; Or if you use use-package
+	       (use-package dashboard
+		 :ensure t
+		 :config
+		 (dashboard-setup-startup-hook))
+	       ;; Content is not centered by default. To center, set
+	       (setq dashboard-center-content t)
+
+	       ;; To disable shortcut "jump" indicators for each section, set
+	       (setq dashboard-show-shortcuts nil)
+
+	       ;; Set visible items
+	       (setq dashboard-items '((recents  . 5)
+				       (bookmarks . 5)
+				       (projects . 5)
+				       (agenda . 5)
+				       (registers . 5)))
+
+   (require 'counsel-projectile)
+
+(add-to-list 'dashboard-items '(agenda) t)
+      (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
+	       ;; Custom item
+	       ;;(defun dashboard-insert-custom (list-size)
+	       ;;(insert "Custom text"))
+	       ;;(add-to-list 'dashboard-item-generators  '(custom . dashboard-insert-custom))
+	       ;;(add-to-list 'dashboard-items '(custom) t)
+
+	    ;; Format: "(icon title help action face prefix suffix)"
+	 ;; Custom setup
+	    ;; (setq dashboard-navigator-buttons
+		  ;; `(;; line1
+		  ;;   ((,(all-the-icons-octicon "mark-github" :height 1.1 :v-adjust 0.0)
+		  ;;    "Homepage"
+		  ;;    "Browse homepage"
+		  ;;    (lambda (&rest _) (browse-url "homepage")))
+		  ;;   ("★" "Star" "Show stars" (lambda (&rest _) (show-stars)) warning)
+		  ;;   ("?" "" "?/h" #'show-help nil "<" ">"))
+		  ;;    ;; line 2
+		  ;;   ((,(all-the-icons-faicon "linkedin" :height 1.1 :v-adjust 0.0)
+		  ;;     "Linkedin"
+		  ;;     ""
+		  ;;     (lambda (&rest _) (browse-url "homepage")))
+		  ;;    ("⚑" nil "Show flags" (lambda (&rest _) (message "flag")) error))))
+	       ;; Add some graphics
+	       (setq dashboard-set-heading-icons t)
+	       (setq dashboard-set-file-icons t)
+	       (setq dashboard-set-navigator t)
+	       (dashboard-modify-heading-icons '((recents . "file-text")
+						    (bookmarks . "book")))
+
+
+				 (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
+ #+end_src
+***** Hide splash screen
+ #+begin_src emacs-lisp
+ (setq inhibit-startup-message t)
+ #+end_src
+***** Hide backup files
+    #+begin_src emacs-lisp
+ (setq backup-directory-alist '(("." . "~C://Users/Christian/backups")))
+    #+end_src
+****** Highlight indents
+
+#+begin_src emacs-lisp
+;(load "c:/Users/Christian/AppData/Roaming/.emacs.d/highlight-indent-guides/highlight-indent-guides")
+ #+end_src
+
+****** Line numbering mode
+   #+begin_src emacs-lisp
+
+     (require 'display-line-numbers)
+     (setq linum-relative-backend 'display-line-numbers-mode)
+     (defcustom display-line-numbers-exempt-modes
+       '(vterm-mode eshell-mode shell-mode term-mode ansi-term-mode)
+       "Major modes on which to disable line numbers."
+       :group 'display-line-numbers
+       :type 'list
+       :version "green")
+
+     (defun display-line-numbers--turn-on ()
+       "Turn on line numbers except for certain major modes.
+     Exempt major modes are defined in `display-line-numbers-exempt-modes'."
+       (unless (or (minibufferp)
+		   (member major-mode display-line-numbers-exempt-modes))
+	 (display-line-numbers-mode)))
+
+     ; (global-display-line-numbers-mode)
+     (load "c:/Users/Christian/AppData/Roaming/.emacs.d/elisp/linum")
+     ;(load "c:/Users/Christian/AppData/Roaming/.emacs.d/highlight-indent-guides/highlight-indent-guides")
+    #+end_src
+
+** Visual customization
+***** Calendar
+         #+begin_src emacs-lisp
+                                                       ; Load dir
+(add-to-list 'load-path "~/.emacs.d/emacs-calfw/")
+
+                                 (require 'calfw)
+                                 (require 'calfw-org)
+                      (setq cfw:org-overwrite-default-keybinding t)
+           ;; Month
+           (setq calendar-month-name-array
+             ["January" "February" "March"     "April"   "May"      "June"
+              "July"    "August"   "September" "October" "November" "December"])
+
+           ;; Week days
+           (setq calendar-day-name-array
+                 ["Sunday" "Monday" "Tuesday" "Wednesday" "Thursday" "Friday" "Saturday"])
+
+           ;; First day of the week
+           (setq calendar-week-start-day 0) ; 0:Sunday, 1:Monday
+         #+end_src
+***** Fonts and encoding
+         #+begin_src emacs-lisp
+         (when (member "Symbola" (font-family-list))
+             (set-fontset-font "fontset-default" nil
+                               (font-spec :size 20 :name "Symbola")))
+
+
+           (when (member "Symbola" (font-family-list))
+             (set-fontset-font t 'unicode "Symbola" nil 'prepend))
+
+
+           (prefer-coding-system       'utf-8)
+           (set-default-coding-systems 'utf-8)
+           (set-terminal-coding-system 'utf-8)
+           (set-keyboard-coding-system 'utf-8)
+           (setq default-buffer-file-coding-system 'utf-8)
+#+end_src
+***** Fonts
+    #+begin_src emacs-lisp
+      ;; Set default font
+      (set-face-attribute 'default nil
+                          :family "Source Code Pro"
+                          :height 110
+                          :weight 'normal
+                          :width 'normal)
+                                #+end_src
+
+
+
+
+*****  All the icons
+    #+begin_src emacs-lisp
+      (require 'all-the-icons)
+                      (use-package all-the-icons-ibuffer
+            :ensure t
+            :hook (ibuffer-mode . all-the-icons-ibuffer-mode))
+
+            ; Predicate whether the icons are able to be displayed."
+      (setq all-the-icons-ibuffer-display-predicate #'display-graphic-p)
+
+      ;; Whether display the icons.
+      (setq all-the-icons-ibuffer-icon t)
+
+      ;; Whether display the colorful icons.
+      ;; It respects `all-the-icons-color-icons'.
+      (setq all-the-icons-ibuffer-color-icon t)
+
+      ;; The default icon size in ibuffer.
+      (setq all-the-icons-ibuffer-icon-size 1.0)
+
+      ;; The default vertical adjustment of the icon in ibuffer.
+      (setq all-the-icons-ibuffer-icon-v-adjust 0.0)
+
+      ;; Use human readable file size in ibuffer.
+      (setq  all-the-icons-ibuffer-human-readable-size t)
+
+      ;; A list of ways to display buffer lines with `all-the-icons'.
+      ;; See `ibuffer-formats' for details.
+      ;all-the-icons-ibuffer-formats
+
+      ;; Slow Rendering
+      ;; If you experience a slow down in performance when rendering multiple icons simultaneously,
+      ;; you can try setting the following variable
+      (setq inhibit-compacting-font-caches t)
+    #+end_src
+***** Hide all toolbars bars
+ #+begin_src emacs-lisp
+ (visual-line-mode 1)
+ (menu-bar-mode -1)
+ (scroll-bar-mode -1)
+ (tool-bar-mode -1)
+ #+end_src
+***** Rand-theme
+#+begin_src emacs-lisp
+  (require 'rand-theme)
+    ;; Themes I *only* want to be selected
+    (setq rand-theme-wanted '(soothe zenburn solarized-dark spacemacs-dark monokai gruvbox cyberpunk ample moe alect-dark afternoon flatland gruber-darker clues dracula))
+
+    (rand-theme)
+  (global-set-key (kbd "C-x z") 'rand-theme-iterate)
+#+end_src
+***** Prettify
+ #+begin_src emacs-lisp
+   (require prettify)
+   (global-prettify-symbols-mode 1)
+      #+end_src
+*****  Indents
+#+begin_src emacs-lisp
+  (require 'highlight-indent-guides)
+    ;(load "c:/Users/Christian/AppData/Roaming/.emacs.d/highlight-indent-guides/highlight-indent-guides")
+    (add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+    (setq highlight-indent-guides-method 'character)
+    (set-face-background 'highlight-indent-guides-odd-face "darkgray")
+  (set-face-background 'highlight-indent-guides-even-face "dimgray")
+  (set-face-foreground 'highlight-indent-guides-character-face "dimgray")
+#+end_src
+***** Modline
+    #+begin_src emacs-lisp
+ (require 'doom-modeline)
+ (doom-modeline-mode 1)
+    #+end_src
+***** Eldoc
+#+begin_src  emacs-lisp
+  (require 'eldoc)
+  ; ADD ELDOC BOX
+#+end_src
